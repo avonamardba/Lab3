@@ -35,15 +35,15 @@ public class FlightsTableApp {
                 .map(Parser::getColumns)
                 .filter(columns -> !columns[AIRPORT_ID].equals(AIRPORT_COLUMN_NAME));
 
-        JavaPairRDD<Tuple2, FlightsParser> flightPairs = flParsed
-                .mapToPair(columns -> {
-                    FlightsParser parser = new FlightsParser(DELIMITER, QUOTATION, columns);
-                    return new Tuple2<>(parser.getOriginAirportID())
-                })
+//        JavaPairRDD<Tuple2, FlightsParser> flightPairs = flParsed
+//                .mapToPair(columns -> {
+//                    FlightsParser parser = new FlightsParser(DELIMITER, QUOTATION, columns);
+//                    return new Tuple2<>(parser.getOriginAirportID(), parser.getDestAirportID()),
+//                    new FlightsParser(parser.getDelay(),parser.getCancelled());
+//                })
 
-        Map<String, String>
 
-        final Broadcast<Map<Long, String>> airportsBroadcasted = sc.broadcast(airportsLines.mapToPair(s -> new Tuple2<>()))
+//        final Broadcast<Map<Long, String>> airportsBroadcasted = sc.broadcast(airportsLines.mapToPair(s -> new Tuple2<>()))
 
     }
 }
