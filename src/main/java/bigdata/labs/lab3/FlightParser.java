@@ -4,6 +4,8 @@ public class FlightParser {
     String delimiter;
     String quote;
     private final String[] columns;
+    private static final int AIRPORT_ID = 0;
+    private static final int AIRPORT_NAME = 1;
     private static final int DEST_AIRPORT = 14;
     private static final int ORIGIN_AIRPORT = 11;
     private static final int DELAY = 18;
@@ -15,6 +17,14 @@ public class FlightParser {
         columns = string.split(d);
     }
 
+    public int getAirportID() {
+        return Integer.parseInt(getColumn(AIRPORT_ID));
+    }
+
+    public int getAirportName() {
+        return Integer.parseInt(getColumn(AIRPORT_NAME));
+    }
+
     public int getOriginAirportID() {
         return Integer.parseInt(getColumn(ORIGIN_AIRPORT));
     }
@@ -22,9 +32,11 @@ public class FlightParser {
         return Integer.parseInt(getColumn(DEST_AIRPORT));
     }
 
-    public String getDelay() {
-        return getColumn(DELAY);
+    public int getDelay() {
+        return Integer.parseInt(getColumn(DELAY));
     }
+
+    public
 
     public String getColumn(int number) {
         return columns[number].replace(quote, EMPTY_STR);
