@@ -11,9 +11,9 @@ public class FlightsMapper extends Mapper<LongWritable, Text, AirportKeyComparab
     private static String QUOTATION = "\"";
 
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        FlightParser parser = new FlightParser(DELIMITER, QUOTATION, value.toString());
+        Parser parser = new Parser(DELIMITER, QUOTATION, value.toString());
         int code = parser.getDestAirportID();
-        int delay = parser.getDelay();
+        String delay = parser.getDelay();
         if (!delay.isEmpty()) {
             context.write(new AirportKeyComparable(code, 1), new Text(delay));
         }
