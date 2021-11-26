@@ -48,7 +48,7 @@ public class FlightsTableApp {
                     FlightsParser p = new FlightsParser(columns);
                     return new Tuple2<>(p.getAirportID(), p.getAirportName());
                 }).collectAsMap());
-        JavaRDD<String> output = flightsTable.map(p -> String.format("%s, %s, %s", airportsBroadcast.value().get(p._1._1), airportsBroadcast.value().get(p._1._2), p._2.getRes()));
+        JavaRDD<String> output = flightsTable.map(p -> String.format("%s, %s, %s", airportsBroadcast.value().get(p._1._1), airportsBroadcast.value().get(p._1._2), p._2.getResult()));
         output.saveAsTextFile("output");
     }
 }
