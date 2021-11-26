@@ -8,7 +8,7 @@ public class FlightData implements Serializable {
     private final float maxDelayTime;
     private final int flights;
 
-    public FlightData(int delayedFlights, int cancelledFlights, int maxDelayTime, int
+    public FlightData(int delayedFlights, int cancelledFlights, float maxDelayTime, int
             flights) {
         this.delayedFlights = delayedFlights;
         this.cancelledFlights = cancelledFlights;
@@ -21,6 +21,17 @@ public class FlightData implements Serializable {
         this.cancelledFlights = Integer.parseInt(c) > 0 ? 1 : 0;
         this.maxDelayTime = d.equals("") ? 0 : Float.parseFloat(d);
         this.flights = 1;
+    }
+
+    static FlightData calculate(FlightData a, FlightData b) {
+        return new FlightData(a.getDelayedFlights() + b.getDelayedFlights(),
+                a.getCancelledFlights() + b.getCancelledFlights(),
+                Math.max(a.getMaxDelayTime(), b.getMaxDelayTime()),
+                a.getFlights() + b.getFlights());
+    }
+
+    public String getRes() {
+        
     }
 
     public int getDelayedFlights() {
