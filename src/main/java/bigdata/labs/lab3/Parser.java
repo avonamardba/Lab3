@@ -22,8 +22,8 @@ public class Parser {
         return Integer.parseInt(getColumn(AIRPORT_ID));
     }
 
-    public int getAirportName() {
-        return Integer.parseInt(getColumn(AIRPORT_NAME));
+    public String getAirportName() {
+        return getColumn(AIRPORT_NAME);
     }
 
     public int getOriginAirportID() {
