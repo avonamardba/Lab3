@@ -1,5 +1,8 @@
 package bigdata.labs.lab3;
 
+import org.apache.spark.api.java.JavaPairRDD;
+import scala.Tuple2;
+
 public class FlightsParser {
     String delimiter;
     String quote;
