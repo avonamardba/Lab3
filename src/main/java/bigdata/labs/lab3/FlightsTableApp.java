@@ -41,7 +41,7 @@ public class FlightsTableApp {
                             new FlightData(p.getDelay(), p.getCancelled()));
                 });
 
-        JavaPairRDD<Tuple2, FlightData> flightsTable = flightPairs.reduceByKey(FlightData::calculate);
+        JavaPairRDD<Tuple2, FlightData> flightsTable = flightPairs.reduceByKey(FlightData::reduceMethod);
 
         final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(alParsed
                 .mapToPair(columns -> {

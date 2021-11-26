@@ -16,14 +16,14 @@ public class FlightData implements Serializable {
         this.flights = flights;
     }
 
-    public FlightData(String d, String c) {
+    public FlightData(@org.jetbrains.annotations.NotNull String d, String c) {
         this.delayedFlights = d.equals("") ? 0 : 1;
         this.cancelledFlights = Integer.parseInt(c) > 0 ? 1 : 0;
         this.maxDelayTime = d.equals("") ? 0 : Float.parseFloat(d);
         this.flights = 1;
     }
 
-    static FlightData calculate(FlightData a, FlightData b) {
+    static FlightData reduceMethod(FlightData a, FlightData b) {
         return new FlightData(a.getDelayedFlights() + b.getDelayedFlights(),
                 a.getCancelledFlights() + b.getCancelledFlights(),
                 Math.max(a.getMaxDelayTime(), b.getMaxDelayTime()),
