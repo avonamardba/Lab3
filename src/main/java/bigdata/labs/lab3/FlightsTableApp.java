@@ -5,6 +5,7 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
+import scala.Int;
 import scala.Tuple2;
 
 import java.util.Map;
@@ -35,15 +36,19 @@ public class FlightsTableApp {
 
         JavaPairRDD<Tuple2, FlightData> flightPairs = flParsed
                 .mapToPair(columns -> {
-                    FlightsParser parser = new FlightsParser(columns);
-                    return new Tuple2<>(parser.getOriginAirportID(), parser.getDestAirportID()),;
-                    new FlightData(parser.getDelay(),parser.getCancelled());
+                    FlightsParser p = new FlightsParser(columns);
+                    return new Tuple2<>(new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
+                    new FlightData(p.getDelay(), p.getCancelled()));
                 });
 
+        JavaPairRDD<Tuple2, FlightData> flightsTable = flightPairs.reduceByKey(FlightData::calculate);
 
-
-
-//        final Broadcast<Map<Long, String>> airportsBroadcasted = sc.broadcast(airportsLines.mapToPair(s -> new Tuple2<>()))
+        final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(alParsed
+                .mapToPair(columns -> {
+                    FlightsParser p = new FlightsParser(columns);
+                    return new Tuple2<>(p.getAirportID(), p.getAirportName())
+                        }
+                ))
 
     }
 }
