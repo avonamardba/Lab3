@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8ca991e0-98ca-4b49-965a-d5508a7ae4cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsTableApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsTableApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

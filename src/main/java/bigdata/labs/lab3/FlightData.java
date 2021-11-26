@@ -31,7 +31,9 @@ public class FlightData implements Serializable {
     }
 
     public String getRes() {
-        
+        return String.format("Delayed percentage: %s%%\n" +
+                "Cancelled percentage: %s%%\n" +
+                "Max delay: %s\n", getDelayedPercentage(), getCancelledPercentage(), maxDelayTime);
     }
 
     public int getDelayedFlights() {

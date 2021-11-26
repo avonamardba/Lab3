@@ -10,8 +10,6 @@ import scala.Tuple2;
 import java.util.Map;
 
 public class FlightsTableApp {
-    private static final String DELIMITER = ",";
-    private static final String QUOTATION = "\"";
     private static final String FLIGHTS_FILE = "664600583_T_ONTIME_sample.csv";
     private static final String AIRPORTS_FILE = "L_AIRPORT_ID.csv";
     private static final int DEST_AIRPORT_ID = 14;
@@ -35,12 +33,14 @@ public class FlightsTableApp {
                 .map(Parser::getColumns)
                 .filter(columns -> !columns[AIRPORT_ID].equals(AIRPORT_COLUMN_NAME));
 
-//        JavaPairRDD<Tuple2, FlightsParser> flightPairs = flParsed
-//                .mapToPair(columns -> {
-//                    FlightsParser parser = new FlightsParser(DELIMITER, QUOTATION, columns);
-//                    return new Tuple2<>(parser.getOriginAirportID(), parser.getDestAirportID()),
-//                    new FlightsParser(parser.getDelay(),parser.getCancelled());
-//                })
+        JavaPairRDD<Tuple2, FlightData> flightPairs = flParsed
+                .mapToPair(columns -> {
+                    FlightsParser parser = new FlightsParser(columns);
+                    return new Tuple2<>(parser.getOriginAirportID(), parser.getDestAirportID()),;
+                    new FlightData(parser.getDelay(),parser.getCancelled());
+                });
+
+
 
 
 //        final Broadcast<Map<Long, String>> airportsBroadcasted = sc.broadcast(airportsLines.mapToPair(s -> new Tuple2<>()))

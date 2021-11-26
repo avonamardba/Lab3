@@ -4,8 +4,6 @@ import org.apache.spark.api.java.JavaPairRDD;
 import scala.Tuple2;
 
 public class FlightsParser {
-    String delimiter;
-    String quote;
     private final String[] columns;
     private static final int AIRPORT_ID = 0;
     private static final int AIRPORT_NAME = 1;
@@ -13,12 +11,9 @@ public class FlightsParser {
     private static final int ORIGIN_AIRPORT = 11;
     private static final int DELAY = 18;
     private static final int CANCELLED = 19;
-    private static final String EMPTY_STR = "";
 
-    public FlightsParser(String d, String q, String string) {
-        delimiter = d;
-        quote = q;
-        columns = string.split(d);
+    public FlightsParser(String[] columns) {
+        this.columns = columns;
     }
 
     public int getAirportID() {
@@ -46,7 +41,7 @@ public class FlightsParser {
     }
 
     public String getColumn(int number) {
-        return columns[number].replace(quote, EMPTY_STR);
+        return columns[number];
     }
 }
 
