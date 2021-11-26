@@ -3,11 +3,11 @@ package bigdata.labs.lab3;
 public class FlightParser {
     String delimiter;
     String quote;
-    private String[] columns;
-    private static int DEST_AIRPORT = 14;
-    private static int AIRPORT = 0;
-    private static int DELAY = 18;
-    private static String EMPTY_STR = "";
+    private final String[] columns;
+    private static final int DEST_AIRPORT = 14;
+    private static final int ORIGIN_AIRPORT = 11;
+    private static final int DELAY = 18;
+    private static final String EMPTY_STR = "";
 
     public FlightParser(String d, String q, String string) {
         delimiter = d;
@@ -15,11 +15,11 @@ public class FlightParser {
         columns = string.split(d);
     }
 
-    public int getAirportID() {
-        return Integer.parseInt(getColumn(DEST_AIRPORT));
+    public int getOriginAirportID() {
+        return Integer.parseInt(getColumn(ORIGIN_AIRPORT));
     }
     public int getDestAirportID() {
-        return Integer.parseInt(getColumn(AIRPORT));
+        return Integer.parseInt(getColumn(DEST_AIRPORT));
     }
 
     public String getDelay() {
