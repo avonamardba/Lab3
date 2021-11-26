@@ -4,7 +4,8 @@ public class FlightParser {
     String delimiter;
     String quote;
     private String[] columns;
-    private static int FLIGHT = 14;
+    private static int DEST_AIRPORT = 14;
+    private static int AIRPORT = 0;
     private static int DELAY = 18;
     private static String EMPTY_STR = "";
 
@@ -15,7 +16,10 @@ public class FlightParser {
     }
 
     public int getAirportID() {
-        return Integer.parseInt(getColumn(FLIGHT));
+        return Integer.parseInt(getColumn(DEST_AIRPORT));
+    }
+    public int getDestAirportID() {
+        return Integer.parseInt(getColumn(AIRPORT));
     }
 
     public String getDelay() {

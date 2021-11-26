@@ -12,7 +12,7 @@ public class FlightsMapper extends Mapper<LongWritable, Text, AirportKeyComparab
 
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         FlightParser parser = new FlightParser(DELIMITER, QUOTATION, value.toString());
-        int code = parser.getAirportID();
+        int code = parser.getDestAirportID();
         String delay = parser.getDelay();
         if (!delay.isEmpty()) {
             context.write(new AirportKeyComparable(code, 1), new Text(delay));
