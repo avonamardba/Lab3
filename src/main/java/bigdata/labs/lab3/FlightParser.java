@@ -11,7 +11,6 @@ public class FlightParser {
     public FlightParser(String d, String q, String string) {
         delimiter = d;
         quote = q;
-
         columns = string.split(d);
     }
 
