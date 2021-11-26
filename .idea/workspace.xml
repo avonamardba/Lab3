@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ca991e0-98ca-4b49-965a-d5508a7ae4cf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsTableApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/FlightsTableApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigdata/labs/lab3/Parser.java" afterDir="false" />
     </list>
