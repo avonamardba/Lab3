@@ -1,8 +1,5 @@
 package bigdata.labs.lab3;
 
-import org.apache.spark.api.java.JavaPairRDD;
-import scala.Tuple2;
-
 public class FlightsParser {
     private final String[] columns;
     private static final int AIRPORT_ID = 0;

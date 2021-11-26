@@ -5,11 +5,11 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
-import scala.Int;
 import scala.Tuple2;
 
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class FlightsTableApp {
     private static final String FLIGHTS_FILE = "664600583_T_ONTIME_sample.csv";
     private static final String AIRPORTS_FILE = "L_AIRPORT_ID.csv";
@@ -38,7 +38,7 @@ public class FlightsTableApp {
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
                     return new Tuple2<>(new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
-                    new FlightData(p.getDelay(), p.getCancelled()));
+                            new FlightData(p.getDelay(), p.getCancelled()));
                 });
 
         JavaPairRDD<Tuple2, FlightData> flightsTable = flightPairs.reduceByKey(FlightData::calculate);
@@ -46,9 +46,9 @@ public class FlightsTableApp {
         final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(alParsed
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
-                    return new Tuple2<>(p.getAirportID(), p.getAirportName())
-                        }
-                ))
-
+                    return new Tuple2<>(p.getAirportID(), p.getAirportName());
+                }).collectAsMap());
+        JavaRDD<String> output = flightsTable.map(p -> String.format("%s, %s, %s", airportsBroadcast.value().get(p._1._1), airportsBroadcast.value().get(p._1._2), p._2.getRes()));
+        output.saveAsTextFile("output");
     }
 }
