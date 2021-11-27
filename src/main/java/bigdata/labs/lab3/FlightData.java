@@ -18,7 +18,7 @@ public class FlightData implements Serializable {
 
     public FlightData(String d, String c) {
         this.delayedFlights = d.equals("") ? 0 : 1;
-        this.cancelledFlights = (int)Double.parseDouble(c) > 0 ? 1 : 0;
+        this.cancelledFlights = Double.parseDouble(c) > 0 ? 1 : 0;
         this.maxDelayTime = d.equals("") ? 0 : Float.parseFloat(d);
         this.flights = 1;
     }
