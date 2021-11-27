@@ -37,8 +37,10 @@ public class FlightsTableApp {
         JavaPairRDD<Tuple2, FlightData> flightPairs = flightsTableParsed
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
-                    return new Tuple2<>(new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
-                            new FlightData(p.getDelay(), p.getCancelled()));
+                    return new Tuple2<>(
+                        new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
+                        new FlightData(p.getDelay(), p.getCancelled())
+                    );
                 });
 
         JavaPairRDD<Tuple2, FlightData> flightsTable = flightPairs.reduceByKey(FlightData::reduceMethod);
