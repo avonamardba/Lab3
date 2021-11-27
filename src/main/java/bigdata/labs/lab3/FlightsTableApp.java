@@ -28,7 +28,8 @@ public class FlightsTableApp {
 
         JavaRDD<String[]> flightsTableParsed = flightsCSVTable
                 .map(Parser::getColumns)
-                .filter(columns -> !columns[DEST_AIRPORT_ID].equals(DEST_AIRPORT_COLUMN_NAME));
+                .filter(columns -> !columns[DEST_AIRPORT_ID].equals(DEST_AIRPORT_COLUMN_NAME)
+                );
 
         JavaRDD<String[]> airportsTableParsed = airportsCSVTable
                 .map(Parser::getColumns)
@@ -38,8 +39,8 @@ public class FlightsTableApp {
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
                     return new Tuple2<>(
-                        new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
-                        new FlightData(p.getDelay(), p.getCancelled())
+                            new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
+                            new FlightData(p.getDelay(), p.getCancelled())
                     );
                 });
 
@@ -49,8 +50,12 @@ public class FlightsTableApp {
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
                     return new Tuple2<>(p.getAirportID(), p.getAirportName());
-                }).collectAsMap());
-        JavaRDD<String> output = flightsTable.map(p -> String.format("%s, %s, %s", airportsBroadcast.value().get(p._1._1), airportsBroadcast.value().get(p._1._2), p._2.getResult()));
+                }).collectAsMap()
+        );
+        JavaRDD<String> output = flightsTable.map(p -> String.format("%s, %s, %s",
+                airportsBroadcast.value().get(p._1._1),
+                airportsBroadcast.value().get(p._1._2),
+                p._2.getResult()));
         output.saveAsTextFile("output");
     }
 }
