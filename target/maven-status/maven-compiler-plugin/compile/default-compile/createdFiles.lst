@@ -1,9 +1,4 @@
-bigdata/labs/lab2/AirportParser.class
-bigdata/labs/lab2/AirportIDComparator.class
-bigdata/labs/lab2/AirportKeyComparable.class
-bigdata/labs/lab2/FlightsMapper.class
-bigdata/labs/lab2/AirportJoinApp.class
-bigdata/labs/lab2/AirportIDPartitioner.class
-bigdata/labs/lab2/AirportReducer.class
-bigdata/labs/lab2/FlightParser.class
-bigdata/labs/lab2/AirportsMapper.class
+bigdata/labs/lab3/FlightData.class
+bigdata/labs/lab3/FlightsTableApp.class
+bigdata/labs/lab3/FlightsParser.class
+bigdata/labs/lab3/Parser.class
