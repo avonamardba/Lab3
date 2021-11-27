@@ -23,18 +23,18 @@ public class FlightsTableApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        JavaRDD<String> flightsLines = sc.textFile(FLIGHTS_FILE);
-        JavaRDD<String> airportsLines = sc.textFile(AIRPORTS_FILE);
+        JavaRDD<String> flightsCSVTable = sc.textFile(FLIGHTS_FILE);
+        JavaRDD<String> airportsCSVTable = sc.textFile(AIRPORTS_FILE);
 
-        JavaRDD<String[]> flParsed = flightsLines
+        JavaRDD<String[]> flightsTableParsed = flightsCSVTable
                 .map(Parser::getColumns)
                 .filter(columns -> !columns[DEST_AIRPORT_ID].equals(DEST_AIRPORT_COLUMN_NAME));
 
-        JavaRDD<String[]> alParsed = airportsLines
+        JavaRDD<String[]> airportsTableParsed = airportsCSVTable
                 .map(Parser::getColumns)
                 .filter(columns -> !columns[AIRPORT_ID].equals(AIRPORT_COLUMN_NAME));
 
-        JavaPairRDD<Tuple2, FlightData> flightPairs = flParsed
+        JavaPairRDD<Tuple2, FlightData> flightPairs = flightsTableParsed
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
                     return new Tuple2<>(new Tuple2<>(p.getOriginAirportID(), p.getDestAirportID()),
@@ -43,7 +43,7 @@ public class FlightsTableApp {
 
         JavaPairRDD<Tuple2, FlightData> flightsTable = flightPairs.reduceByKey(FlightData::reduceMethod);
 
-        final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(alParsed
+        final Broadcast<Map<Integer, String>> airportsBroadcast = sc.broadcast(airportsTableParsed
                 .mapToPair(columns -> {
                     FlightsParser p = new FlightsParser(columns);
                     return new Tuple2<>(p.getAirportID(), p.getAirportName());
